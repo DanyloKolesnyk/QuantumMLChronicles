@@ -8,7 +8,7 @@ The objective is to compare classical simulations with quantum methods to determ
 
 In this folder, you will find two primary notebooks:
 
-1. **Classical Ising Model Simulation**: This notebook addresses the problem using **mean-field approximations** and, in some cases, references **Monte Carlo methods** for statistical analysis. The focus is on the energy spectrum, magnetization, and correlations between spins. The classical approach is reliable and provides a strong foundation for understanding the model.
+1. **Classical Ising Model Simulation**: This notebook addresses the problem using **mean-field approximations** and **exact diagonalization** methods. The focus is on the energy spectrum, magnetization, and correlations between spins. The classical approach is reliable and provides a strong foundation for understanding the model.
 
 2. **Quantum Ising Model Simulation**: This notebook employs **quantum computing** techniques, specifically the **Variational Quantum Eigensolver (VQE)**, to solve the Ising Hamiltonian using quantum circuits. We compare the eigenvalues obtained from quantum simulations with classical results to highlight any notable differences.
 
@@ -16,7 +16,7 @@ In this folder, you will find two primary notebooks:
 
 - **Classical Ising Model**:
   - Utilizes mean-field theory for approximations.
-  - Involves references to Monte Carlo methods for statistical analysis (though these are not the main focus).
+  - Employs exact diagonalization to obtain the energy spectrum and eigenstates.
   - Provides visualizations of spin configurations, their evolution, and magnetization curves.
 
 - **Quantum Ising Model**:
@@ -39,7 +39,7 @@ The quantum approach, while not always outperforming classical methods in terms 
 
 ## Motivation for Comparing Classical and Quantum Methods
 
-Classical models are well-established and powerful, but quantum simulations have the potential to provide new insights, particularly in systems involving significant entanglement. Although current quantum hardware may not yet surpass classical methods in accuracy, investigating these approaches helps us understand the potential for **quantum advantage** in the future.
+Classical models are well-established and powerful, and for this situation, exact diagonalization is possible and provides reliable results. However, as the system size increases, classical diagonalization becomes computationally infeasible due to the exponential growth in the Hilbert space. Quantum simulations, in contrast, have the potential to provide efficient solutions for larger systems by leveraging quantum parallelism and entanglement. Although current quantum hardware may not yet surpass classical methods in accuracy, exploring these quantum approaches helps us understand the potential for **quantum advantage** as hardware continues to improve.
 
 ## Future Work
 
