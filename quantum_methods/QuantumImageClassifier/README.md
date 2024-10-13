@@ -4,7 +4,7 @@ The **QuantumClassifier** project is focused on bridging the gap between quantum
 
 ## 🎯 Current Status: Significant Progress
 
-At this stage, the classifier is functional and has achieved a **95% accuracy** on the test set, leveraging **Qiskit** for quantum data encoding and a simple parameterized ansatz. This improvement is a huge leap from our initial attempts and demonstrates the potential of quantum-enhanced machine learning, even in its early stages.
+At this stage, the classifier is functional and has achieved a **95% accuracy** on the test set, leveraging **Qiskit** for quantum data encoding and a simple parameterized ansatz. This improvement is a huge leap from our initial attempts.
 
 ### Test Accuracy: **95%**
 
