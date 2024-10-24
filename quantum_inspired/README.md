@@ -1,58 +1,42 @@
-# Quantum Inspired ✨
+# Quantum Inspired 🐢
 
-Welcome to the **Quantum Inspired** section, where we dive deep into the magical world of **tensor networks** and other quantum mechanical principles in search of machine learning breakthroughs. Here, you'll find a collection of techniques that *sound* like they should outperform classical methods, but (spoiler alert!) often don’t... at least not yet. But hey, if we're having fun along the way and getting better than 80% accuracy, it’s a win, right? 😄
+Welcome to the **Quantum Inspired** section, where I explore the practical use of **tensor networks** and other quantum mechanical principles in machine learning. Here, you'll find techniques that aim to outperform classical methods, but often need more time and research to get there. If we’re achieving significant progress along the way, I'd say it's a win.
 
 ## Overview
 
-In this folder, I experiment with **quantum-inspired approaches** to machine learning. These techniques borrow from the elegant math of quantum mechanics—like tensor networks, state optimization, and entanglement—and apply them to practical machine learning problems. 
-
-So far, I’ve implemented:
-- **MPS Classifier on MNIST**: A full-fledged MPS (Matrix Product States) model with gradient optimization.
-- **Simplified State Averaging Classifier**: A more down-to-earth version where I simply compute the average quantum state for each digit class, achieving surprisingly solid results with **80%+ accuracy**. Who knew averaging could be so effective?
+In this folder, I experiment with **quantum-inspired approaches** to machine learning. These techniques borrow from the mathematics of quantum mechanics—like tensor networks, state optimization, and entanglement—and apply them to real machine learning and optimization problems.
 
 ### What's Inside?
 
-This folder will soon house multiple quantum-inspired techniques, but for now, you can find:
+This folder is organized into multiple sections, each dedicated to a specific quantum-inspired technique:
 
-1. **MPS Classifier (Gradient-Optimized)**:
-   - This method uses a full tensor network with gradient descent to classify digits from the MNIST dataset. Think of it like going for a long, scenic road trip through the universe of quantum states.
-   - It’s sophisticated, precise, and... well, it usually performs about as well as more classical approaches—but hey, it’s quantum, so that’s cool, right?
+1. **DMRG Techniques**:
+   - Currently, my main focus is on exploring **Density Matrix Renormalization Group (DMRG)** techniques. These methods are crucial for optimizing tensor networks, especially in higher-dimensional data and more complex models.
 
-2. **Simplified Averaged Quantum State Classifier**:
-   - Instead of optimizing individual states for each training example, this approach averages the quantum states of all training samples for each digit class. The result is a clean, simplified quantum state for each digit. 
-   - The kicker? This less “quantum fancy” version performs surprisingly well, with **80%+ accuracy** on MNIST. Turns out, sometimes less is more!
-
----
-
-## Current Results
-
-| **Method**                         | **Accuracy**      |
-|------------------------------------ |------------------ |
-| MPS Classifier (Gradient Optimized) | ~94%              |
-| Averaged Quantum State Classifier   | ~80%              |
-
-It’s worth noting that while these quantum-inspired methods tend to perform on par (or slightly below) classical models, they offer unique ways of thinking about data—ways that could become more powerful as quantum hardware and software evolve. For now, we enjoy the intellectual exercise and the journey into the quantum realm. 🚀
+2. **MNIST Classification with MPS**:
+   - Implementations of **Matrix Product States (MPS)** for classifying images from the MNIST dataset. Includes both gradient-optimized methods and simplified averaging approaches.
 
 ---
 
 ## What’s Next?
 
-Expect to see more approaches soon! Here are a few ideas I'm working on:
+Expect more approaches soon! My main interest now is to look into **DMRG techniques** to further optimize tensor networks and explore new quantum-inspired algorithms.
 
-- **PEPS (Projected Entangled Pair States)**: Extending the MPS framework into two dimensions for even more complex models.
-- **Quantum Kernel Methods**: Exploring quantum kernel techniques for classification.
-- **Variational Quantum Circuits**: Trying out hybrid quantum-classical models that optimize quantum circuits for better ML performance.
+Other ideas I'm working on:
+
+- **PEPS (Projected Entangled Pair States)**: Extending the MPS framework into two dimensions.
 
 ---
 
 ## Why Quantum (Even If It Works Just as Well)?
 
-Because it’s **quantum**, and sometimes you just want to feel like a wizard casting spells on your data. ⚡ Besides, as the world shifts towards quantum computing, these methods could become crucial for leveraging the full potential of quantum algorithms in machine learning.
+Because it’s **quantum**, and it's exciting to explore these new approaches. As the world shifts towards quantum computing, these methods might become crucial for leveraging quantum algorithms in machine learning. It's also important to build bridges between classical and quantum approaches, as these transitions will be needed continuously in the future.
 
 ---
 
 ## Stay Tuned!
 
-This folder will be regularly updated with new approaches, both simple and complex. Whether they work better than classical methods or not, at least they’re fun to try! 
+This folder will be regularly updated with new approaches, both simple and complex. Whether they work better than classical methods or not, it’s all about the journey and what we learn along the way.
 
 Got any suggestions or want to collaborate? Feel free to reach out.
+
