@@ -1,8 +1,8 @@
-# QuantumMLChronicles 🚀
+# QuantumMLChronicles 🐉
 
 **Welcome to QuantumMLChronicles**, where I, **Kolesnyk Danylo**, a student at **TUM** (Technische Universität München), explore the world of **quantum computing** and **machine learning**. This repository is a blend of everything I've learned from **lectures, papers, seminars, and labs**, along with my own experiments (read: trial and error, because science).
 
-## 🌌 What’s This All About?
+## 🐢 What’s This All About?
 
 The main goal here is to **bridge classical and quantum computing** in the realm of machine learning. While some of the approaches might not outperform classical methods just yet, they represent steps toward a future where quantum computing has a significant impact on AI.
 
@@ -26,7 +26,7 @@ This is where **Qiskit** gets involved. I'm using **Variational Quantum Circuits
 
 I'm always updating this repository, so expect new techniques, experiments, and a few missteps along the way. Upcoming areas include **time series data**, **financial data**, and other complex datasets—all with a quantum or tensor-based twist.
 
-## 🧑‍🎓 Motivation (Why am I doing this?)
+## 🐙 Motivation (Why am I doing this?)
 
 I'm interested in new techniques for quantum machine learning and quantum-inspired algorithms. Quantum computing has the potential to reshape everything from optimization to AI, and exploring this frontier is both challenging and exciting
 
