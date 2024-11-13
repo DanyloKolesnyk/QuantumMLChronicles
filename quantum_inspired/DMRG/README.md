@@ -1,59 +1,84 @@
-# Matrix Product State (MPS) with Compression Layer
+# Generative AI with Density Matrix Renormalization Group (DMRG) and Matrix Product States (MPS)
 
-This notebook implements a training procedure for a Matrix Product State (MPS) model with a compression layer, following the algorithm described in the research paper [Generative Learning of Continuous Data by Tensor Networks](https://arxiv.org/abs/2310.20498). The MPS efficiently models high-dimensional data, and the compression layer reduces the dimensionality of the input data before feeding it into the MPS, improving computational efficiency.
+This project leverages Density Matrix Renormalization Group (DMRG) techniques combined with Matrix Product States (MPS) for generative modeling using the Bars and Stripes dataset. The approach focuses on efficiently modeling high-dimensional data by integrating a compression layer that reduces input dimensionality, thereby enhancing computational efficiency.
 
 ## Overview
 
-In this notebook, we focus on optimizing a **compression layer** to reduce the input physical dimension for MPS. The main steps include:
+In this project, we aim to optimize a **compression layer** to minimize the input physical dimension for the MPS model. The primary workflow includes:
 
-1. **Data Loading and Preprocessing**: Load an artificial dataset, normalize it, and reshape it for MPS representation.
-2. **Apply MPS Construction**: Construct the MPS from the flattened input vectors. Each input feature gets its own tensor representation, forming a network of tensors.
-3. **Compression Layer Training**: Train the compression matrices using the Procrustes problem to find an optimal transformation that reduces the physical dimension.
+1. **Data Generation and Visualization**: Generate all unique Bars and Stripes patterns for a specified grid size and visualize them.
+2. **Data Preprocessing**: Preprocess the generated images by replacing zero values with small random values and applying feature maps using cosine and sine functions.
+3. **MPS Initialization and Orthonormalization**: Initialize the MPS tensors with random values and orthonormalize them using QR decomposition to ensure numerical stability.
+4. **Training Functions**: Implement functions for contracting the MPS with input data, computing norms, and calculating gradients essential for training.
+5. **Compression Layer Training**: Train the compression matrices to optimally reduce the input dimensionality using the Procrustes problem, solved via Singular Value Decomposition (SVD).
+6. **Training Loop with DMRG Sweeps**: Perform iterative sweeps (left-to-right and right-to-left) to optimize the MPS tensors, incorporating gradient clipping to prevent exploding gradients.
+7. **Result Visualization**: Plot the loss values over training iterations to monitor convergence and performance.
 
-The compression layer helps in significantly reducing the computational cost by decreasing the feature map dimensions, making MPS optimization more practical.
+The integration of a compression layer significantly reduces computational costs by decreasing feature map dimensions, making MPS optimization more practical and efficient.
 
 ## Key Components
 
-- contract_mps_except_i Function: Contracts the MPS with compressed input data, excluding a specified site. This function computes the vector $v_{i,j}$ for a given sample $x^{(j)}$ and site $i$ by contracting the MPS with compressed input data, excluding site $i$.
+### 1. Data Generation and Visualization
 
-Process:
+- **Bars and Stripes Dataset**: Generates all unique binary configurations for a specified grid size, focusing on bars (row-wise patterns) and stripes (column-wise patterns).
+- **Visualization**: Displays the generated patterns to provide a clear understanding of the dataset's structure.
 
-Compress input data for each site:
+### 2. Data Preprocessing
 
-$n \neq i$, compress the input data $x_n^{(j)}$ using the compression matrix $U_n$:
-   
-   $\tilde{x}_n^{(j)} = U_n^T x_n^{(j)}$
+- **Replacement of Zeros**: Replaces zero values in the images with small random values to stabilize training and prevent issues related to zero gradients.
 
-Sequentially contract the MPS tensors over the bond dimensions, skipping the contraction over the physical dimension at site $i$.
+- **Feature Mapping**: Applies cosine and sine transformations to the preprocessed images to enhance feature representation.
 
-The result is a vector $v_{i,j}$, representing the MPS-contracted embedding excluding site $i$.
+  $$
+  \phi(x) = \begin{bmatrix}
+    \cos(\pi x) \\
+    \sin(\pi x)
+  \end{bmatrix}
+  $$
 
-- **`train_compression_layer` Function**: Trains the compression matrices $U_i$ using the input data and
-  the MPS. The compression matrices are updated to minimize the negative log-likelihood loss using the Procrustes problem, which is solved with **singular value decomposition (SVD)**.
+### 3. Matrix Product States (MPS) Initialization and Orthonormalization
 
+- **MPS Tensors Initialization**: Initializes the MPS tensors with random values scaled by the inverse of the total number of sites to ensure appropriate scaling.
+
+- **Orthonormalization**: Utilizes QR decomposition to orthonormalize the MPS tensors, ensuring that the MPS maintains numerical stability during training.
+
+  - **Local Orthonormalization**: Right-orthonormalizes individual tensors.
+  - **Global Orthonormalization**: Applies local orthonormalization across all tensors in the MPS.
+
+### 4. Training Functions
+
+- **Contraction Functions**: Implements functions to contract the MPS with input data, excluding specific sites as needed to compute vectors representing the MPS-contracted embeddings.
+- **Norm Computation**: Calculates the norm of the MPS to ensure proper scaling during loss computation.
+
+- **Gradient Calculation**: Defines the loss function based on negative log-likelihood and computes gradients for MPS tensors to facilitate optimization.
+
+### 5. Compression Layer Training
+
+- **Compression Matrices ($U_i$)**: Trains the compression matrices to optimally reduce the input dimensionality while preserving essential information.
+  
   **Algorithm Overview:**
-  - For each site $i$, compute $u_{i,j}$ and $v_{i,j}$, where $u_{i,j}$ is the input feature vector at site $i$ and $v_{i,j}$ is the MPS-contracted embedding excluding site $i$.
-  - Use these values to compute the inner product $c_j$, calculate magnitude and phase, accumulate the negative log-likelihood loss, and update the compression matrix $U_i$ using SVD.
+  
+  1. For each site $i$, compute $u_{i,j}$ (input feature vector) and $v_{i,j}$ (MPS-contracted embedding excluding site $i$).
+  2. Calculate the inner product $c_j = u_{i,j}^T U_i v_{i,j}$.
+  3. Determine the magnitude $p_j = |c_j|$ and phase $\phi_j = \frac{c_j}{p_j}$.
+  4. Accumulate the negative log-likelihood (NLL) loss over all samples.
+  5. Update the compression matrix $U_i$ by solving the Procrustes problem using Singular Value Decomposition (SVD).
+  
+  $$
+  U_i = \text{argmin}_{U} \sum_j -\log\left(\frac{|c_j|^2}{\| \text{MPS} \|^2}\right)
+  $$
 
-Future Plans
+### 6. Training Loop with DMRG Sweeps
 
-This folder will eventually contain the latest DMRG implementation techniques. The compression layer presented here is the first step, and more techniques will be added later to further enhance the efficiency and performance of the MPS and DMRG algorithms.
-## Results
+- **DMRG Sweeps**: Executes iterative left-to-right and right-to-left sweeps to optimize the MPS tensors.
+- **Gradient Clipping**: Applies gradient clipping techniques to prevent exploding gradients during the optimization process.
 
-In our experiments with an artificial, easy dataset, we observed that the compression matrices $U_i$ initially started as random 2x2 matrices and, after a few epochs, transformed into near-identity 
+### 7. Result Visualization
 
-$$\begin{bmatrix}
- 0.9998 &  -0.0188 \\
-0.0188 & 0.9998 
-\end{bmatrix}$$
+- **Loss Plotting**: Visualizes the loss values over training iterations to monitor convergence and assess the model's performance.
 
-This demonstrates that the compression layer successfully learned an optimal transformation that preserves the input features while reducing dimensionality.
+![output](https://github.com/user-attachments/assets/3850f9be-4948-4c37-8c8f-d5b9dc664a1f)
 
-## Motivation
-
-MPS is a powerful tool for capturing correlations in data, but large physical dimensions can make computations infeasible. The compression layer provides an effective way to make MPS more practical by reducing the input size without sacrificing too much information, allowing us to perform efficient optimization.
-
-This notebook presents a ready solution for optimizing the input compression for MPS, showing promising results even with minimal training epochs.
-
-Feel free to explore and experiment with the provided code!
+  
+  *Figure: Loss over DMRG Iterations.*
 
